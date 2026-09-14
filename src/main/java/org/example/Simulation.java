@@ -15,11 +15,13 @@ public class Simulation {
 
 
     public void render() {
-        Set<Coordinates> coordinates = Collections.emptySet();
         for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                System.out.println(tiger);
+            for (int j = 0; j < 10; j++) {
+                System.out.print("..  ");
+                Coordinates coordinates = new Coordinates(i,j);
+
             }
+            System.out.println();
         }
     }
 }
