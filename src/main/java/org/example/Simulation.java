@@ -1,44 +1,112 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import org.example.Entites.*;
+
 import java.util.List;
-import java.util.Set;
 
 public class Simulation {
 
-    public static final String deer = "\uD83E\uDD8C";
-    public static final String tree = "\uD83C\uDF33";
-    public static final String rock = "\uD83E\uDEA8";
-    public static final String grass = "\uD83C\uDF31";
+    public int randomX;
+    public int randomY;
 
 
+    public void render(GameMap gameMap) {
 
-    public void render() {
-        List<Predator> predators = new ArrayList<>();
-        List<Coordinates> coordinates = new ArrayList<>();
 
-        int num = (int) (Math.random() * (30 - 15 + 1)) + 15;
-     //   Coordinates coordinates = new Coordinates(10,7);
-
-        Predator tiger = new Predator(11,100,coordinates);
-
-        for (int i = 1; i < 11; i++) {
-            for (int j = 0; j < 16; j++) {
-                coordinates.add();
-            }
+        if (gameMap.entities.isEmpty()) {
+            startingCountOfEntities(gameMap);
         }
 
 
-        for (int i = 1; i < 11; i++) {
-            for (int j = 1; j < 16; j++) {
-                if (i == tiger.coordinates.x && j == tiger.coordinates.y) {
-                    System.out.print(" "+tiger.tiger + " ");
-                } else {
+        for (int x = 1; x < 11; x++) {
+            for (int y = 1; y < 16; y++) {
+
+                Coordinates coordinates = new Coordinates(x, y);
+
+
+                //ошибка гдето в if неправильная рабоат метода iscellempty
+
+                if (gameMap.isCellEmpty(coordinates)) {
                     System.out.print(" .. ");
+                } else {
+                    System.out.print(" " + getEntitySprite(gameMap.getEntity(coordinates)) + " ");
                 }
             }
             System.out.println();
         }
+    }
+
+    public void startingCountOfEntities(GameMap gameMap) {
+        int numberOfPredators = (int) (Math.random() * (15 - 10 + 1)) + 10;
+        int numberOfHerbivore = (int) (Math.random() * (15 - 10 + 1)) + 10;
+        int numberOfGrass = (int) (Math.random() * (15 - 10 + 1)) + 10;
+        int numberOfRock = (int) (Math.random() * (5 - 1 + 1)) + 1;
+        int numberOfTree = (int) (Math.random() * (5 - 1 + 1)) + 1;
+
+
+        for (int i = 0; i < numberOfPredators; i++) {
+
+            Coordinates coordinates = new Coordinates((int) (Math.random() * (10)) + 1,(int) (Math.random() * (15)) + 1);
+
+            if (!gameMap.isCellEmpty(coordinates)) {
+                i--;
+            } else {;
+                gameMap.entities.put(coordinates, new Predator(1,1,coordinates));
+            }
+        }
+
+        for (int i = 0; i < numberOfHerbivore; i++) {
+
+            Coordinates coordinates = new Coordinates((int) (Math.random() * (10)) + 1,(int) (Math.random() * (15)) + 1);
+
+            if (!gameMap.isCellEmpty(coordinates)) {
+                i--;
+            } else {
+                gameMap.entities.put(coordinates,new Herbivore(1,1,coordinates));
+            }
+        }
+        for (int i = 0; i < numberOfGrass; i++) {
+
+            Coordinates coordinates = new Coordinates((int) (Math.random() * (10)) + 1,(int) (Math.random() * (15)) + 1);
+
+            if (!gameMap.isCellEmpty(coordinates)) {
+                i--;
+            } else {
+                gameMap.entities.put(coordinates,new Grass(coordinates));
+            }
+        }
+        for (int i = 0; i < numberOfTree; i++) {
+
+            Coordinates coordinates = new Coordinates((int) (Math.random() * (10)) + 1,(int) (Math.random() * (15)) + 1);
+
+            if (!gameMap.isCellEmpty(coordinates)) {
+                i--;
+            } else {
+                gameMap.entities.put(coordinates,new Tree(coordinates));
+            }
+        }
+        for (int i = 0; i < numberOfRock; i++) {
+
+            Coordinates coordinates = new Coordinates((int) (Math.random() * (10)) + 1,(int) (Math.random() * (15)) + 1);
+
+            if (!gameMap.isCellEmpty(coordinates)) {
+                i--;
+            } else {
+                gameMap.entities.put(coordinates,new Rock(coordinates));
+            }
+        }
+    }
+
+
+
+    public String getEntitySprite(Entity entity) {
+        return switch (entity.getClass().getSimpleName()) {
+            case "Predator" -> "\uD83D\uDC05";
+            case "Grass" -> "\uD83C\uDF31";
+            case "Herbivore" -> "\uD83E\uDD8C";
+            case "Rock" -> "\uD83E\uDEA8";
+            case "Tree" -> "\uD83C\uDF33";
+            default -> "";
+        };
     }
 }

@@ -1,9 +1,11 @@
-package org.example;
+package org.example.Entites;
 
-public class Predator extends Creature{
-    public final String tiger = "\uD83D\uDC05";
+import org.example.Coordinates;
+
+public class Predator extends Creature {
 
     public Predator(int speed, int hp, Coordinates coordinates) {
         super(speed,hp, coordinates);
     }
+
 }
