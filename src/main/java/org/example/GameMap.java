@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 public class GameMap {
     public HashMap<Coordinates, Entity> entities = new HashMap<>();
+    public HashMap<Coordinates, Entity> predators = new HashMap<>();
+    public HashMap<Coordinates, Entity> herbivores = new HashMap<>();
 
 
 

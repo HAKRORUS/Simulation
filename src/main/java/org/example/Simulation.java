@@ -6,17 +6,15 @@ import java.util.List;
 
 public class Simulation {
 
-    public int randomX;
-    public int randomY;
 
-
-    public void render(GameMap gameMap) {
+    public void render(GameMap gameMap, Herbivore herbivore, Predator predator) {
 
 
         if (gameMap.entities.isEmpty()) {
             startingCountOfEntities(gameMap);
         }
 
+        for (int i = 0; i < 2; i++) {
 
         for (int x = 1; x < 11; x++) {
             for (int y = 1; y < 16; y++) {
@@ -24,15 +22,16 @@ public class Simulation {
                 Coordinates coordinates = new Coordinates(x, y);
 
 
-                //ошибка гдето в if неправильная рабоат метода iscellempty
-
                 if (gameMap.isCellEmpty(coordinates)) {
                     System.out.print(" .. ");
                 } else {
                     System.out.print(" " + getEntitySprite(gameMap.getEntity(coordinates)) + " ");
                 }
             }
-            System.out.println();
+                System.out.println();
+            }
+        herbivore.makeMove();
+        predator.makeMove();
         }
     }
 
@@ -52,6 +51,7 @@ public class Simulation {
                 i--;
             } else {;
                 gameMap.entities.put(coordinates, new Predator(1,1,coordinates));
+                gameMap.predators.put(coordinates, new Predator(1,1,coordinates));
             }
         }
 
@@ -63,6 +63,7 @@ public class Simulation {
                 i--;
             } else {
                 gameMap.entities.put(coordinates,new Herbivore(1,1,coordinates));
+                gameMap.herbivores.put(coordinates,new Herbivore(1,1,coordinates));
             }
         }
         for (int i = 0; i < numberOfGrass; i++) {
@@ -104,7 +105,7 @@ public class Simulation {
             case "Predator" -> "\uD83D\uDC05";
             case "Grass" -> "\uD83C\uDF31";
             case "Herbivore" -> "\uD83E\uDD8C";
-            case "Rock" -> "\uD83E\uDEA8";
+            case "Rock" -> "\uD83D\uDDFB";
             case "Tree" -> "\uD83C\uDF33";
             default -> "";
         };

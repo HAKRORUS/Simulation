@@ -11,4 +11,8 @@ public abstract class Creature extends Entity {
         this.speed = speed;
         this.hp = hp;
     }
+
+    public void makeMove() {
+        return null;
+    }
 }
