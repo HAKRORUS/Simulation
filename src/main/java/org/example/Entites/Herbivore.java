@@ -2,9 +2,10 @@ package org.example.Entites;
 
 import org.example.Coordinates;
 import org.example.CoordinatesShift;
+import org.example.GameMap;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Herbivore extends Creature {
     public Herbivore(int speed, int hp, Coordinates coordinates) {
@@ -12,8 +13,8 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    public void makeMove() {
-        Set<CoordinatesShift> result = new HashSet<>();
+    public Coordinates makeMove(GameMap gameMap) {
+        List<CoordinatesShift> result = new ArrayList<>();
 
         for (int xShift = -1; xShift <= 1; xShift++) {
             for (int yShift = -1; yShift <= 1; yShift++) {
@@ -23,7 +24,9 @@ public class Herbivore extends Creature {
                 result.add(new CoordinatesShift(xShift,yShift));
             }
         }
-         (int) (Math.random() * (15 - 10 + 1)) + 10
-        while ()
+        int randomMove = (int) (Math.random() * result.size());
+        while (coordinates.canShift(result.get(randomMove)) && gameMap.isCellEmptyForMove(result.get(randomMove))) {
+        }
+            return new Coordinates(x);
     }
 }

@@ -24,4 +24,8 @@ public class GameMap {
         return !entities.containsKey(coordinates);
     }
 
+    public boolean isCellEmptyForMove(CoordinatesShift coordinatesShift) {
+        return !entities.containsKey(coordinatesShift);
+    }
+
 }

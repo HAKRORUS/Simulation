@@ -1,6 +1,7 @@
 package org.example.Entites;
 
 import org.example.Coordinates;
+import org.example.GameMap;
 
 public abstract class Creature extends Entity {
     public final int speed;
@@ -13,6 +14,7 @@ public abstract class Creature extends Entity {
     }
 
     public void makeMove() {
-        return null;
     }
+
+    public abstract Coordinates makeMove(GameMap gameMap);
 }

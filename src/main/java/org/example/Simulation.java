@@ -14,7 +14,7 @@ public class Simulation {
             startingCountOfEntities(gameMap);
         }
 
-        for (int i = 0; i < 2; i++) {
+ //       for (int i = 0; i < 2; i++) {
 
         for (int x = 1; x < 11; x++) {
             for (int y = 1; y < 16; y++) {
@@ -32,7 +32,7 @@ public class Simulation {
             }
         herbivore.makeMove();
         predator.makeMove();
-        }
+ //       }
     }
 
     public void startingCountOfEntities(GameMap gameMap) {
